@@ -29,4 +29,4 @@ jobs:
         echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan "${{ secrets.HOST }}" >> ~/.ssh/known_hosts
-        rsync ./public/bundle.js ./app.html ${{ secrets.USER }}@${{ secrets.HOST }}:${{ secrets.TARGET }}
+        rsync ./public/bundle.js ./public/bundle.css ./app.html ${{ secrets.USER }}@${{ secrets.HOST }}:${{ secrets.TARGET }}

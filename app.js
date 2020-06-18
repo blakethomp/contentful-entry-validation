@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { render } from 'react-dom';
 import { init, locations } from 'contentful-ui-extensions-sdk';
-import { ValidationMessage } from '@contentful/forma-36-react-components/dist/components/ValidationMessage';
+import ValidationMessage from '@contentful/forma-36-react-components/dist/components/ValidationMessage';
+import Note from '@contentful/forma-36-react-components/dist/components/Note';
+
+import '@contentful/forma-36-react-components/dist/styles.css';
 
 init(sdk => {
   if (!sdk.location.is(locations.LOCATION_APP_CONFIG)) {
@@ -40,8 +43,9 @@ function ValidatedJSON ({ sdk }) {
   return (
     <>
       {!isValid && <ValidationMessage>{Object.keys(validationProps).map(key => (
-          !validationProps[key] && <div>{sdk.contentType.fields.find(element => element.id === key).name} is invalid.</div>
+          !validationProps[key] && <div key={key}>{sdk.contentType.fields.find(element => element.id === key).name} is invalid.</div>
       ))}</ValidationMessage>}
+      {isValid && <Note noteType="positive">Custom validation looks good!</Note>}
     </>
   )
 }
